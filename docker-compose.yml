@@ -1,0 +1,60 @@
+---
+version: '3'
+services:
+    dnsmasq:
+        container_name: dnsmasq
+        image: jpillora/dnsmasq
+        ports:
+          - "127.0.0.2:53:53/udp"
+        volumes:
+            - ./dnsmasq.conf:/etc/dnsmasq.conf
+
+    web:
+        container_name: web
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+            - ..:/var/www/
+
+    php-72:
+        container_name: php72
+        image: php:7.2-fpm
+        volumes:
+            - ..:/var/www/
+    php-74:
+        container_name: php74
+        image: php:7.4-fpm
+        volumes:
+            - ..:/var/www/
+
+    php-80:
+        container_name: php80
+        image: php:8.0-fpm
+        volumes:
+            - ..:/var/www/
+
+    redis:
+        container_name: redis
+        image: redis
+
+    mysql:
+        container_name: mysql
+        image: mysql
+        environment:
+          MYSQL_ROOT_PASSWORD: 'root'
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+    mailhog:
+      image: mailhog/mailhog:latest
+      logging:
+          driver: 'none'
+      ports:
+          - 1025:1025
+          - 8025:8025
+
+volumes:
+  mysql_data:
