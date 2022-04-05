@@ -11,7 +11,7 @@ If you have the following project structure:
 
 Then the following domains will be available: `project1.php72.loc`, `project1.php74.loc`, `project1.php80.loc`, `project2.php72.loc`, `project2.php74.loc` and `project2.php80.loc`.
 
-# Configure local dns to use the dnsmasq container to resolve `.loc` domains.
+## Configure local dns to use the dnsmasq container to resolve `.loc` domains.
 Edit `/etc/systemd/resolved.conf` and append:
 ```
 DNS=127.0.0.2
