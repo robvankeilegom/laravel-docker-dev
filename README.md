@@ -24,7 +24,7 @@ Domains=loc
 
 ### Start the containers
 ```
-docker-composer up -d --build
+docker-compose up -d --build
 ```
 
 
